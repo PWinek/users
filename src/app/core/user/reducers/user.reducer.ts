@@ -1,25 +1,21 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import * as UserActions from '../actions/user.actions';
+import { combineReducers } from '@ngrx/store';
 import * as fromUserEntity from './user-entity.reducer';
+import * as fromUserList from './user-list.reducer';
 
 export const userFeatureKey = 'user';
-
 export interface UserState {
-  list: {};
-  userEntities: fromUserEntity.UserEntitiesState;
+  [fromUserList.userListFeatureKey]: fromUserList.ListUserState;
+  [fromUserEntity.userEntitiesFeatureKey]: fromUserEntity.UserEntitiesState;
 }
 
 export const userInitialState: UserState = {
-  list: {},
+  [fromUserList.userListFeatureKey]: fromUserList.listUserInitialState,
   [fromUserEntity.userEntitiesFeatureKey]: fromUserEntity.initialState,
 };
-
-export const userReducer = createReducer(
-  userInitialState,
-  on(UserActions.loadUsers, (state) => state),
-  on(UserActions.loadUsersSuccess, (state, action) => ({
-    ...state,
-    list: action.data,
-  })),
-  on(UserActions.loadUsersFailure, (state, action) => state)
+export const userReducer = combineReducers<UserState>(
+  {
+    [fromUserList.userListFeatureKey]: fromUserList.reducer,
+    [fromUserEntity.userEntitiesFeatureKey]: fromUserEntity.reducer,
+  },
+  userInitialState
 );

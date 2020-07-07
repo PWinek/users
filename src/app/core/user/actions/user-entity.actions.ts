@@ -20,7 +20,7 @@ export const upsertUserEntity = createAction(
 
 export const addUserEntities = createAction(
   '[UserEntity/API] Add UserEntities',
-  props<{ userEntities: UserModel[] }>()
+  props<{ userEntities: any }>()
 );
 
 export const upsertuserEntities = createAction(
