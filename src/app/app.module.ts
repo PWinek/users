@@ -10,20 +10,26 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { checkingReducer } from './core/login/reducer/login.reducers';
+
 
 @NgModule({
-  declarations: [AppComponent, UsersComponent],
+  declarations: [AppComponent, UsersComponent, LoginPageComponent],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AppStoreModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({login: checkingReducer}),
     EffectsModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
+
     StoreDevtoolsModule.instrument(),
   ],
   providers: [],

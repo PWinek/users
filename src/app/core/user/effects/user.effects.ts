@@ -6,15 +6,14 @@ import { of } from 'rxjs';
 import * as UserActions from '../actions/user.actions';
 import * as UserEntityActions from '../actions/user-entity.actions';
 import { UserService } from '../service/user.service';
-import { UserModel } from '../models/user-entity.model';
-import {log} from "util";
+
 
 @Injectable()
 export class UserEffects {
   loadUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.loadUsers),
-      concatMap(() =>
+      concatMap((action) =>
         this.service.getHeroes().pipe(
           map((res) =>
             UserActions.loadUsersSuccess({
@@ -33,11 +32,11 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.loadUsersSuccess),
       map((action) => action.data.res.entities),
-      map((data) =>{
-        console.log(data.userEntities);
+      map((data) => {
+        console.log ( data.userEntities );
        return  UserEntityActions.addUserEntities({
           userEntities: data.userEntities,
-        });}
+        }); }
       )
     )
   );

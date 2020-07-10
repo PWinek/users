@@ -19,9 +19,12 @@ export interface ListUserState extends ByIdState<ListState> {}
 export const listUserInitialState: ListUserState = {};
 export const listUserReducer = createReducer<ListUserState>(
   listUserInitialState,
-  on(UserActions.loadUsers, (state) : ByIdState<ListState>=> {
-    return listByIdReducerUtil.getById(state);
-  }),
+  on(
+    UserActions.loadUsers,
+    (state): ByIdState<ListState> => {
+      return listByIdReducerUtil.getById(state);
+    }
+  ),
   on(UserActions.loadUsersSuccess, (state, actions) =>
     listByIdReducerUtil.getSuccessById(state, actions)
   ),

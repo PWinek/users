@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+
 
 const routes: Routes = [
-  { path: 'user/:id', canActivate: [], component: UsersComponent },
+  { path: '', canActivate: [], component: LoginPageComponent },
+  { path: 'users', canActivate: [], component: UsersComponent },
 ];
 
 @NgModule({
@@ -11,3 +14,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+

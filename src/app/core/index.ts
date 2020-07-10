@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 
 export const stateFeatureKey = 'state';
 
-export interface State {}
+export interface State{}
 
 export const reducers: ActionReducerMap<State> = {};
 export function getReducers(): ActionReducerMap<State, Action> {
