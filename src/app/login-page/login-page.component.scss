@@ -1,0 +1,29 @@
+.login_window {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+}
+input {
+  width: 100%;
+  padding: 2px;
+}
+input::placeholder {
+  padding: 3px;
+}
+input:focus::placeholder {
+  color: transparent;
+}
+label {
+  width: 100%;
+}
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fail {
+  display: none;
+  color: red;
+  text-align: center;
+}

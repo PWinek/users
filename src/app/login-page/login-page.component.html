@@ -1,0 +1,30 @@
+<!--<p>login-page works!</p>-->
+<link rel="stylesheet" href="login-page.component.scss" />
+<div class="login_window">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <label>
+      <input
+        placeholder="Login"
+        id="login"
+        type="text"
+        formControlName="login"
+      />
+      <div class="fail">błędne dane logowania</div>
+    </label>
+    <br />
+    <br />
+    <label>
+      <input
+        placeholder="Password"
+        id="password"
+        type="password"
+        formControlName="password"
+      />
+      <br />
+      <br />
+      <div class="container">
+        <button type="submit">Zaloguj</button>
+      </div>
+    </label>
+  </form>
+</div>
