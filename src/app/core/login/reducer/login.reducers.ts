@@ -1,57 +1,52 @@
-import { createReducer, props, on } from '@ngrx/store';
+// import * as logoutAction from '../actions/logout.actions';
+import { createReducer, on } from '@ngrx/store';
 import * as loginAction from '../actions/login.actions';
-import * as logoutAction from '../actions/logout.actions';
-
+import * as loggedUserActions from '../actions/loggedUser.actions';
 
 export const loginFeatureKey = 'login';
 
-export interface LoginState {
-  username: string;
-  password: string;
-  isLogin: boolean;
-  isAuth: boolean;
-  error: string;
+// export interface error {
+//   status?:number;
+//   message?:string;
+// }
+
+export interface loginState {
+  success?: boolean;
+  loading?: boolean;
+  error?: any;
 }
+export const loginStateInitialState: loginState = {};
 
-export const loginInitialState: LoginState = {
-  username: null,
-  password: null,
-  isLogin: null,
-  isAuth: null,
-  error: null,
- };
-
-const _checkingReducer = createReducer(
-  loginInitialState,
+const _checkingLoginReducer = createReducer(
+  loginStateInitialState,
   on(loginAction.login, (state, action) => ({
     ...state,
-    username: action.username,
-    password: action.password,
+    // username: action.username,
+    success: false,
+    loading: true,
+    error: false,
   })),
   on(loginAction.loginSucces, (state, action) => ({
     ...state,
-    isAuth: action.isAuth,
-    isLogin: action.isLogin,
+    success: true,
+    loading: false,
+    error: null,
   })),
-  on(loginAction.loginFail, (state, action) => ({
+  on(loginAction.loginFailed, (state, action) => ({
     ...state,
+    success: false,
+    loading: false,
     error: action.error,
   })),
-  on(logoutAction.logout, (state, action) => ({
+  on(loginAction.loginInfoClear, (state, action) => ({
     ...state,
-  })),
-  on(logoutAction.logoutSucces, (state, action) => ({
-    ...state,
-    username: null,
-    password: null,
-    isAuth: action.isAuth,
-    isLogin: action.isLogin,
-   })),
-  on(logoutAction.logoutFail, (state, action) => ({
-    ...state,
-    error: action.error,
-   }))
+    success: null,
+    loading: null,
+    error: null,
+  }))
 );
-export function checkingReducer(state, action) {
-  return _checkingReducer(state, action);
+
+export function checkingLoginReducer(state, action) {
+  return _checkingLoginReducer(state, action);
 }
+

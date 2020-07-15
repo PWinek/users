@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-
 import * as LogoutActions from '../actions/logout.actions';
 import * as LoginActions from '../actions/login.actions';
+import * as UserInfoActions from '../actions/loggedUser.actions';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 
@@ -17,11 +17,39 @@ export class LoginEffect {
         this.service.isLogin(action.username, action.password).pipe(
           map((res) =>
             LoginActions.loginSucces({
-              isLogin: res.isLogin,
-              isAuth: res.isAuth,
+              success: res,
             })
           ),
-          catchError((error) => of(LoginActions.loginFail({ error })))
+          catchError((error) =>
+            of(
+              LoginActions.loginFailed({
+                error: error,
+              })
+            )
+          )
+        )
+      )
+    );
+  });
+
+  userData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserInfoActions.UserInfoGathering),
+      concatMap((action) =>
+        this.service.UserInfo(action.username).pipe(
+          map((res) =>
+            UserInfoActions.UserInfoGatheringSucces({
+              id: res,
+              username: action.username,
+            })
+          ),
+          catchError((error) =>
+            of(
+              UserInfoActions.UserInfoGatheringFail({
+                error: error,
+              })
+            )
+          )
         )
       )
     );
@@ -30,14 +58,15 @@ export class LoginEffect {
     return this.actions$.pipe(
       ofType(LogoutActions.logout),
       concatMap((action) =>
-        this.service.isLogout(action.id).pipe(
-          map((res) =>
-            LogoutActions.logoutSucces({
-              isLogin: res.isLogin,
-              isAuth: res.isAuth,
-            })
-          ),
-          catchError((error) => of(LogoutActions.logoutFail({ error })))
+        this.service.isLogout().pipe(
+          map((res) => LogoutActions.logoutSucces({})),
+          catchError((error) =>
+            of(
+              LogoutActions.logoutFail({
+                error: error,
+              })
+            )
+          )
         )
       )
     );

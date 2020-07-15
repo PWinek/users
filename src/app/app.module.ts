@@ -10,29 +10,42 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { checkingReducer } from './core/login/reducer/login.reducers';
-
+import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatFormFieldModule,
+} from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { AppMaterialModule } from './material-module';
 
 @NgModule({
   declarations: [AppComponent, UsersComponent, LoginPageComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
+    MatNativeDateModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     AppStoreModule,
-    StoreModule.forRoot({login: checkingReducer}),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
 
     StoreDevtoolsModule.instrument(),
+    MatFormFieldModule,
+    AppMaterialModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { NormalizedList } from '../../common/models/normalized';
-import { normalize, schema } from 'normalizr';
 import * as _ from 'lodash';
 
 @Injectable({ providedIn: 'root' })
@@ -18,21 +15,30 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   users = [
-    { id: 1, login: 'Adam', pass: 'qwerty' },
-    { id: 2, login: 'Adam1', pass: 'qwerty1' },
-    { id: 3, login: 'Adam2', pass: 'qwerty2' },
-    { id: 4, login: 'Adam3', pass: 'qwerty3' },
-    { id: 5, login: 'Adam4', pass: 'qwerty4' },
-    { id: 6, login: 'Adam5', pass: 'qwerty5' },
+    { id: 1, login: 'Adam', pass: 'qwerty', surname: 'Taki' },
+    { id: 2, login: 'Adam1', pass: 'qwerty1', surname: 'Taki' },
+    { id: 3, login: 'Adam2', pass: 'qwerty2', surname: 'Taki' },
+    { id: 4, login: 'Adam3', pass: 'qwerty3', surname: 'Taki' },
+    { id: 5, login: 'Adam4', pass: 'qwerty4', surname: 'Taki' },
+    { id: 6, login: 'Adam5', pass: 'qwerty5', surname: 'Taki' },
   ];
 
   isLogin(userName: string, password: string): Observable<any> {
-    const isAuth = !!_.find(this.users, (user) => {
+    const islogin = !!_.find(this.users, (user) => {
       return user.login === userName && user.pass === password;
     });
-    return of({ isLogin: true, isAuth });
+    return islogin ? of(islogin) : throwError('błędne dane logowania');
   }
-  isLogout(id): Observable<any> {
-    return of({ isLogin: false, isAuth: null });
+  UserInfo(username: string): Observable<any> {
+    const userId = _.find(this.users, (user) => {
+      return user.login === username;
+    });
+    return userId
+      ? of(userId.id)
+      : throwError('Nie można pobrać danych użytkownika');
+  }
+
+  isLogout() {
+    return of(true);
   }
 }

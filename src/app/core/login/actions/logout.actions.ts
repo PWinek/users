@@ -1,14 +1,15 @@
 import { createAction, props } from '@ngrx/store';
 
-export const logout = createAction(
-  '[Logout Page] Logout',
-  props<{ id: number }>()
-);
+export const logout = createAction('[logout Page] logout', props<{}>());
 export const logoutSucces = createAction(
-  '[Logout Page] Logout Succes',
-  props<{ isLogin: boolean, isAuth: boolean }>()
+  '[logout Page] logout succes',
+  props<{}>()
 );
 export const logoutFail = createAction(
-  '[Logout Page] Logout Fail',
+  '[logout Page] logout failed',
   props<{ error: string }>()
+);
+export const logoutInfoClear = createAction(
+  '[Login Page] Login info clear',
+  props<{}>()
 );

@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { login } from '../core/login/actions/login.actions';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { State } from '../core';
 import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
+// import {selectAuthSucces, selectIsLogin,} from '../core/login/selectors/login.selector';
+import { UserInfoGathering } from '../core/login/actions/loggedUser.actions';
 import {
-  selectAuth,
-  selectIsLogin,
+  selectLoginSucces,
+  sleectUserError,
 } from '../core/login/selectors/login.selector';
-import { filter } from 'rxjs/operators';
-import * as _ from 'lodash';
+import { selectUserInfoSucces } from '../core/login/selectors/user.selector';
 
 @Component({
   selector: 'app-login-page',
@@ -19,30 +20,29 @@ import * as _ from 'lodash';
 })
 export class LoginPageComponent implements OnInit {
   login$: Observable<boolean>;
-  auth$: Observable<boolean>;
+  auth$: Observable<any>;
+  userError$: Observable<string>;
   profileForm: FormGroup;
+  hide = true;
 
   constructor(private store: Store<State>, private router: Router) {}
 
   ngOnInit(): void {
     this.createForm();
-    this.login$ = this.store.pipe(select(selectIsLogin));
-    this.auth$ = this.store.pipe(select(selectAuth));
+    this.userError$ = this.store.pipe(select(sleectUserError));
+    this.login$ = this.store.pipe(select(selectLoginSucces));
+    this.auth$ = this.store.pipe(select(selectUserInfoSucces));
 
-    combineLatest([this.login$, this.auth$])
-      .pipe(
-        filter(([isLogin, isAuth]) => !_.isNil(isLogin) && !_.isNil(isAuth))
-      )
-      .subscribe(([isLogin, isAuth]) => {
-        // console.log({ isLogin, isAuth });
-        isLogin && isAuth
-          ? this.router.navigate(['users'])
-          : !isLogin && isAuth
-          ? this.router.navigate(['/'])
-          : isLogin && !isAuth
-          ? this.wrongLoginData()
-          : console.log('cos nie tak');
-      });
+    this.login$.subscribe((login) => {
+      login ? this.infoGather() : console.log('cos nie tak');
+    });
+
+    combineLatest([this.auth$, this.userError$]).subscribe(
+      ([isAuth, isError]) => {
+        console.log({ isAuth, isError });
+        isAuth ? this.router.navigate(['users']) : console.log('cos nie tak');
+      }
+    );
   }
 
   createForm() {
@@ -60,11 +60,11 @@ export class LoginPageComponent implements OnInit {
       })
     );
   }
-
-  wrongLoginData() {
-    let input = document.querySelectorAll('input');
-    let fail = document.querySelectorAll('.fail');
-    input.forEach((input) => (input.style.border = '1.7px solid red'));
-    fail[0].setAttribute('style', 'display:block');
+  infoGather() {
+    this.store.dispatch(
+      UserInfoGathering({
+        username: this.profileForm.value.login,
+      })
+    );
   }
 }

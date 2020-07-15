@@ -1,29 +1,39 @@
 <!--<p>login-page works!</p>-->
+<script src="../core/login/reducer/login.reducers.ts"></script>
 <link rel="stylesheet" href="login-page.component.scss" />
 <div class="login_window">
+  <div class="fail" *ngIf="userError$ | async">{{ userError$ | async }}</div>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <label>
-      <input
-        placeholder="Login"
-        id="login"
-        type="text"
-        formControlName="login"
-      />
-      <div class="fail">błędne dane logowania</div>
+      <mat-form-field appearance="fill">
+        <mat-label> Enter your Login</mat-label>
+        <input formControlName="login" matInput />
+      </mat-form-field>
     </label>
     <br />
     <br />
     <label>
-      <input
-        placeholder="Password"
-        id="password"
-        type="password"
-        formControlName="password"
-      />
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your Password</mat-label>
+        <input
+          formControlName="password"
+          matInput
+          [type]="hide ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
       <br />
       <br />
       <div class="container">
-        <button type="submit">Zaloguj</button>
+        <button type="submit" mat-raised-button color="primary">Zaloguj</button>
       </div>
     </label>
   </form>
