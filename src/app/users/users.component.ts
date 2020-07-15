@@ -13,6 +13,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {}
   getUser() {
-    this.store.dispatch(loadUsers({ payload: { id: 1 } }));
+    this.store.dispatch(loadUsers({ id: 1 }));
   }
 }

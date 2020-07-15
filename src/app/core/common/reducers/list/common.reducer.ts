@@ -31,11 +31,10 @@ export let listReducerUtil = {
     state: ListState<P, M>,
     action: any
   ): ListState<P, M> {
-    const successPayload: SuccessPayload<NormalizedList<P, M>> = action.data;
-    console.log(successPayload);
+    const successPayload: NormalizedList<P, M> = action.data;
     return <ListState<P, M>>{
       ...state,
-      ids: successPayload.res.result,
+      data: successPayload,
       loading: false,
       success: true,
       errors: null,
@@ -49,7 +48,7 @@ export let listReducerUtil = {
       const failPayload: FailPayload = action.payload;
       return <ListState<P, M>>{
         ...state,
-        ids: [],
+        data: [],
         loading: false,
         errors: failPayload.errors,
         success: false,
@@ -58,65 +57,65 @@ export let listReducerUtil = {
   },
 };
 
-function createListIdsSelector<P = { [key: string]: any }, M = ListMeta>(
-  listStateSelector
-) {
-  return createSelector(
-    listStateSelector,
-    (state: ListState<P, M>) => state && state.ids
-  );
-}
-
-function createListParamsSelector<P = { [key: string]: any }, M = ListMeta>(
-  listStateSelector
-) {
-  return createSelector(
-    listStateSelector,
-    (state: ListState<P, M>) => state && state.params
-  );
-}
-
-function createListMetaSelector<P = { [key: string]: any }, M = ListMeta>(
-  listStateSelector
-) {
-  return createSelector(
-    listStateSelector,
-    (state: ListState<P, M>) => state && state.meta
-  );
-}
-
-function createListLoadingSelector<P = { [key: string]: any }, M = ListMeta>(
-  listStateSelector
-) {
-  return createSelector(
-    listStateSelector,
-    (state: ListState<P, M>) => state && state.loading
-  );
-}
-
-function createListSuccessSelector<P = { [key: string]: any }, M = ListMeta>(
-  listStateSelector
-) {
-  return createSelector(
-    listStateSelector,
-    (state: ListState<P, M>) => state && state.success
-  );
-}
-
-function createListErrorsSelector<P = { [key: string]: any }, M = ListMeta>(
-  listStateSelector
-) {
-  return createSelector(
-    listStateSelector,
-    (state: ListState<P, M>) => state && state.errors
-  );
-}
-
-function createListTotalCountSelector<P = { [key: string]: any }>(
-  listStateSelector
-) {
-  return createSelector(
-    createListMetaSelector<P, ListMeta>(listStateSelector),
-    (meta: ListMeta) => meta && meta.TotalCount
-  );
-}
+// function createListIdsSelector<P = { [key: string]: any }, M = ListMeta>(
+//   listStateSelector
+// ) {
+//   return createSelector(
+//     listStateSelector,
+//     (state: ListState<P, M>) => state && state.data
+//   );
+// }
+//
+// function createListParamsSelector<P = { [key: string]: any }, M = ListMeta>(
+//   listStateSelector
+// ) {
+//   return createSelector(
+//     listStateSelector,
+//     (state: ListState<P, M>) => state && state.params
+//   );
+// }
+//
+// function createListMetaSelector<P = { [key: string]: any }, M = ListMeta>(
+//   listStateSelector
+// ) {
+//   return createSelector(
+//     listStateSelector,
+//     (state: ListState<P, M>) => state && state.meta
+//   );
+// }
+//
+// function createListLoadingSelector<P = { [key: string]: any }, M = ListMeta>(
+//   listStateSelector
+// ) {
+//   return createSelector(
+//     listStateSelector,
+//     (state: ListState<P, M>) => state && state.loading
+//   );
+// }
+//
+// function createListSuccessSelector<P = { [key: string]: any }, M = ListMeta>(
+//   listStateSelector
+// ) {
+//   return createSelector(
+//     listStateSelector,
+//     (state: ListState<P, M>) => state && state.success
+//   );
+// }
+//
+// function createListErrorsSelector<P = { [key: string]: any }, M = ListMeta>(
+//   listStateSelector
+// ) {
+//   return createSelector(
+//     listStateSelector,
+//     (state: ListState<P, M>) => state && state.errors
+//   );
+// }
+//
+// function createListTotalCountSelector<P = { [key: string]: any }>(
+//   listStateSelector
+// ) {
+//   return createSelector(
+//     createListMetaSelector<P, ListMeta>(listStateSelector),
+//     (meta: ListMeta) => meta && meta.TotalCount
+//   );
+// }

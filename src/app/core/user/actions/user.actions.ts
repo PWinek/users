@@ -1,21 +1,17 @@
 import { createAction, props } from '@ngrx/store';
-import {UserModel} from "../models/user-entity.model";
-import {ByIdPayload, SuccessByIdPayload} from "../../common/models/payload/by-id";
-import {HttpErrorResponse} from "@angular/common/http";
-import {PayloadAction} from "../../common/models/payload-action";
-import {NormalizedList} from "../../common/models/normalized";
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadUsers = createAction(
   '[User] Load Users',
-  props<{ payload: ByIdPayload }>()
+  props<{ id: number }>()
 );
 
 export const loadUsersSuccess = createAction(
   '[User] Load Users Success',
-  props<{ data: SuccessByIdPayload<NormalizedList> }>()
+  props<{ id: number; data: any }>()
 );
 
 export const loadUsersFailure = createAction(
   '[User] Load Users Failure',
-  props<{ error: HttpErrorResponse }>()
+  props<{ id: number; error: HttpErrorResponse }>()
 );

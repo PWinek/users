@@ -16,7 +16,7 @@ export class ListUtil {
     params?: P
   ): ListState<P, M> {
     return {
-      ids: null,
+      data: null,
       loading: false,
       success: false,
       errors: null,

@@ -17,15 +17,15 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getHeroes(): Observable<NormalizedList<UserModel>> {
-    const myData =  [{ id: 1 }, { id: 2 }];
-    return of(myData).pipe(
-      map((res) => {
-        const user = new schema.Entity('userEntities');
-        const mySchema = [user];
-        return normalize(res, mySchema);
-      })
-    );
+  getHeroes(): Observable<any> {
+    const myData = {
+      Items: [
+        { id: 11, name: 'Dr Nice' },
+        { id: 21, name: 'Nice' },
+      ],
+      TotalCount: 10,
+    };
+    return of(myData);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
