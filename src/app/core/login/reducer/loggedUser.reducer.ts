@@ -14,14 +14,14 @@ export const loggedUserInitialState: loggedUserState = {};
 
 const _checkingLoggedUserDataReducer = createReducer(
   loggedUserInitialState,
-  on(loggedUserActions.UserInfoGathering, (state, action) => ({
+  on(loggedUserActions.GetUserInfo, (state, action) => ({
     ...state,
     username: action.username,
     success: false,
     loading: true,
     error: false,
   })),
-  on(loggedUserActions.UserInfoGatheringSucces, (state, action) => ({
+  on(loggedUserActions.GetUserInfoSucces, (state, action) => ({
     ...state,
     id: action.id,
     username: action.username,
@@ -29,7 +29,7 @@ const _checkingLoggedUserDataReducer = createReducer(
     loading: false,
     error: null,
   })),
-  on(loggedUserActions.UserInfoGatheringFail, (state, action) => ({
+  on(loggedUserActions.GetUserInfoFail, (state, action) => ({
     ...state,
     success: false,
     loading: false,

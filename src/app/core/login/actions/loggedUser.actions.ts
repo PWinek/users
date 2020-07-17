@@ -1,14 +1,14 @@
 import { createAction, props } from '@ngrx/store';
 
-export const UserInfoGathering = createAction(
+export const GetUserInfo = createAction(
   '[Login Page] User info gathering',
   props<{ username: string }>()
 );
-export const UserInfoGatheringSucces = createAction(
+export const GetUserInfoSucces = createAction(
   '[Login Page] User info gathering succes',
   props<{ id: number; username: string }>()
 );
-export const UserInfoGatheringFail = createAction(
+export const GetUserInfoFail = createAction(
   '[Login Page] User info gathering fail',
   props<{ error: string }>()
 );

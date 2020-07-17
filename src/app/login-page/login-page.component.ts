@@ -5,8 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { State } from '../core';
 import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
-// import {selectAuthSucces, selectIsLogin,} from '../core/login/selectors/login.selector';
-import { UserInfoGathering } from '../core/login/actions/loggedUser.actions';
+import {GetUserInfo} from '../core/login/actions/loggedUser.actions';
 import {
   selectLoginSucces,
   sleectUserError,
@@ -64,7 +63,7 @@ export class LoginPageComponent implements OnInit {
   }
   infoGather() {
     this.store.dispatch(
-      UserInfoGathering({
+      GetUserInfo({
         username: this.profileForm.value.login,
       })
     );

@@ -1,0 +1,19 @@
+.userContainer
+{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  padding:1.5vw;
+}
+app-search-aside,app-side-nav
+{
+  flex:1;
+  background-color: #a3abae;
+  display: flex;
+  flex-direction: column;
+}
+app-users-table
+{
+  flex:4;
+  background-color: #c6cbcd;
+}

@@ -23,13 +23,13 @@ export class LoginService {
     { id: 6, login: 'Adam5', pass: 'qwerty5', surname: 'Taki' },
   ];
 
-  isLogin(userName: string, password: string): Observable<any> {
-    const islogin = !!_.find(this.users, (user) => {
+  login(userName: string, password: string): Observable<any> {
+    const login = !!_.find(this.users, (user) => {
       return user.login === userName && user.pass === password;
     });
-    return islogin ? of(islogin) : throwError('błędne dane logowania');
+    return login ? of(login) : throwError('błędne dane logowania');
   }
-  UserInfo(username: string): Observable<any> {
+  userInfo(username: string): Observable<any> {
     const userId = _.find(this.users, (user) => {
       return user.login === username;
     });
@@ -38,7 +38,7 @@ export class LoginService {
       : throwError('Nie można pobrać danych użytkownika');
   }
 
-  isLogout() {
+  logout() {
     return of(true);
   }
 }

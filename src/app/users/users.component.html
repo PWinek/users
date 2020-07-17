@@ -1,16 +1,11 @@
 <script src="../login-page/login-page.component.ts"></script>
-<button (click)="getUser()">
-  Get User
+
+<app-user-header> </app-user-header>
+<div class="userContainer">
+  <app-side-nav></app-side-nav>
+  <app-users-table></app-users-table>
+  <app-search-aside></app-search-aside>
+</div>
+<button (click)="logOut()">
+  Log Out
 </button>
-<main>
-  <header><button (click)="logOut()">
-    Log Out
-  </button>
-  </header>
-  <nav></nav>
-  <article></article>
-  <aside></aside>
-  <footer></footer>
-</main>
-
-

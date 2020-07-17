@@ -1,14 +1,7 @@
-// import * as logoutAction from '../actions/logout.actions';
 import { createReducer, on } from '@ngrx/store';
 import * as loginAction from '../actions/login.actions';
-import * as loggedUserActions from '../actions/loggedUser.actions';
 
 export const loginFeatureKey = 'login';
-
-// export interface error {
-//   status?:number;
-//   message?:string;
-// }
 
 export interface loginState {
   success?: boolean;
@@ -49,4 +42,3 @@ const _checkingLoginReducer = createReducer(
 export function checkingLoginReducer(state, action) {
   return _checkingLoginReducer(state, action);
 }
-

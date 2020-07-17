@@ -14,7 +14,7 @@ export class LoginEffect {
     return this.actions$.pipe(
       ofType(LoginActions.login),
       concatMap((action) =>
-        this.service.isLogin(action.username, action.password).pipe(
+        this.service.login(action.username, action.password).pipe(
           map((res) =>
             LoginActions.loginSucces({})
           ),
@@ -32,18 +32,18 @@ export class LoginEffect {
 
   userData$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UserInfoActions.UserInfoGathering),
+      ofType(UserInfoActions.GetUserInfo),
       concatMap((action) =>
-        this.service.UserInfo(action.username).pipe(
+        this.service.userInfo(action.username).pipe(
           map((res) =>
-            UserInfoActions.UserInfoGatheringSucces({
+            UserInfoActions.GetUserInfoSucces({
               id: res,
               username: action.username,
             })
           ),
           catchError((error) =>
             of(
-              UserInfoActions.UserInfoGatheringFail({
+              UserInfoActions.GetUserInfoFail({
                 error: error,
               })
             )
@@ -56,7 +56,7 @@ export class LoginEffect {
     return this.actions$.pipe(
       ofType(LogoutActions.logout),
       concatMap((action) =>
-        this.service.isLogout().pipe(
+        this.service.logout().pipe(
           map((res) => LogoutActions.logoutSucces({})),
           catchError((error) =>
             of(
@@ -72,6 +72,5 @@ export class LoginEffect {
   constructor(
     private actions$: Actions,
     private service: LoginService,
-    private router: Router
   ) {}
 }
