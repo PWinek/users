@@ -11,7 +11,7 @@ import {
   selectLoginSucces,
   sleectUserError,
 } from '../core/login/selectors/login.selector';
-import { selectUserInfoSucces } from '../core/login/selectors/user.selector';
+import {selectUserInfoSucces, selectUserName} from '../core/login/selectors/user.selector';
 
 @Component({
   selector: 'app-login-page',
@@ -19,6 +19,7 @@ import { selectUserInfoSucces } from '../core/login/selectors/user.selector';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
+  userName$:Observable<string>;
   login$: Observable<boolean>;
   auth$: Observable<any>;
   userError$: Observable<string>;
@@ -32,6 +33,7 @@ export class LoginPageComponent implements OnInit {
     this.userError$ = this.store.pipe(select(sleectUserError));
     this.login$ = this.store.pipe(select(selectLoginSucces));
     this.auth$ = this.store.pipe(select(selectUserInfoSucces));
+    this.userName$ = this.store.pipe(select(selectUserName));
 
     this.login$.subscribe((login) => {
       login ? this.infoGather() : console.log('cos nie tak');

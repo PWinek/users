@@ -6,7 +6,7 @@ export const login = createAction(
 );
 export const loginSucces = createAction(
   '[Login Page] Login succes',
-  props<{ success: boolean }>()
+  props<{ }>()
 );
 export const loginFailed = createAction(
   '[Login Page] Login failed',

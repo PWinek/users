@@ -16,14 +16,12 @@ export class LoginEffect {
       concatMap((action) =>
         this.service.isLogin(action.username, action.password).pipe(
           map((res) =>
-            LoginActions.loginSucces({
-              success: res,
-            })
+            LoginActions.loginSucces({})
           ),
           catchError((error) =>
             of(
               LoginActions.loginFailed({
-                error: error,
+                error:error,
               })
             )
           )

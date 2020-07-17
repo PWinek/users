@@ -10,3 +10,6 @@ export const selectUserInfoSucces = createSelector(selectUserInfo, (state) => {
 export const selectUserId = createSelector(selectUserInfo, (state) => {
   return state && state.id;
 });
+export const selectUserName = createSelector(selectUserInfo, (state) => {
+  return state && state.username;
+});

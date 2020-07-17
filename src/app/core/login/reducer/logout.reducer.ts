@@ -29,7 +29,7 @@ const _checkingLogoutReducer = createReducer(
     ...state,
     success: false,
     loading: false,
-    error: null,
+    error: action.error,
   })),
   on(logoutAction.logoutInfoClear, (state, action) => ({
     ...state,

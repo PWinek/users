@@ -1,6 +1,8 @@
 <!--<p>login-page works!</p>-->
-<script src="../core/login/reducer/login.reducers.ts"></script>
-<link rel="stylesheet" href="login-page.component.scss" />
+<script src="login-page.component.spec.ts"></script>
+<link rel="stylesheet" href="login-page.component.scss">
+<script src="login-page.component.ts"></script>
+<script src="../app.component.spec.ts"></script>
 <div class="login_window">
   <div class="fail" *ngIf="userError$ | async">{{ userError$ | async }}</div>
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
@@ -33,8 +35,9 @@
       <br />
       <br />
       <div class="container">
-        <button type="submit" mat-raised-button color="primary">Zaloguj</button>
+        <button id="submit" type="submit" mat-raised-button color="primary">Zaloguj</button>
       </div>
     </label>
   </form>
 </div>
+

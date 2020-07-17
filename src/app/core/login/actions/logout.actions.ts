@@ -10,6 +10,6 @@ export const logoutFail = createAction(
   props<{ error: string }>()
 );
 export const logoutInfoClear = createAction(
-  '[Login Page] Login info clear',
+  '[logout Page] Login info clear',
   props<{}>()
 );
