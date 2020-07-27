@@ -46,8 +46,9 @@ mat-form-field {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(red, transparent),
-  linear-gradient(to top left, lime, transparent),
-  linear-gradient(to top right, blue, transparent);
-  background-blend-mode: screen;
+  background-color:#d1d1d1
+}
+#submit
+{
+  background-color: dodgerblue;
 }

@@ -15,3 +15,7 @@ export const userReducer = combineReducers<UserState>(
   },
   userInitialState
 );
+
+
+export const selectUserState = (state: UserState) =>
+  state && state[userFeatureKey];

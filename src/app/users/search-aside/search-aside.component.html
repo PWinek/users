@@ -1,0 +1,49 @@
+<script src="../../core/login/actions/login.actions.ts"></script>
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <div class="searchingForm">
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Imię i nazwisko</mat-label>
+        <input formControlName="name" matInput />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="standard">
+        <mat-label>Login</mat-label>
+        <input formControlName="username" matInput />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Adres e-mail</mat-label>
+        <input formControlName="email" matInput placeholder="jan@gmail.com" />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Numer telefonu</mat-label>
+        <input formControlName="phone" matInput placeholder="123456789" />
+      </mat-form-field>
+    </p>
+  </div>
+  <div class="searchButtons">
+    <button
+      (click)="clear()"
+      class="clear"
+      type="button"
+      mat-raised-button
+      color="Link"
+    >
+      Wyczyść
+    </button>
+    <button
+      id="submit"
+      class="find"
+      type="submit"
+      mat-raised-button
+      color="Link"
+    >
+      Wyszukaj
+    </button>
+  </div>
+</form>

@@ -6,13 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from '../app-routing.module';
-import { AppStoreModule } from '../core/app-store.module';
+import { AppRoutingModule } from '../../../app-routing.module';
+import { AppStoreModule } from '../../app-store.module';
 import { EffectsModule, EffectSources, EffectsRootModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from '../users/users.component';
+import { UsersComponent } from '../../../users/users.component';
 import { Location } from '@angular/common';
-import { State } from '../core';
+import { State } from '../../index';
 
 
 

@@ -11,8 +11,8 @@ export const listUserReducer = createReducer<ListUserState>(
   listUserInitialState,
   on(
     UserActions.loadUsers,
-    (state): ByIdState<ListState> => {
-      return listByIdReducerUtil.getById(state);
+    (state, actions): ByIdState<ListState> => {
+      return listByIdReducerUtil.getById(state, actions);
     }
   ),
   on(UserActions.loadUsersSuccess, (state, actions) =>
@@ -20,8 +20,17 @@ export const listUserReducer = createReducer<ListUserState>(
   ),
   on(UserActions.loadUsersFailure, (state, actions) =>
     listByIdReducerUtil.getFailureById(state, actions)
-  )
+  ),
+  on(UserActions.userChangeParams, (state, action) =>
+    listByIdReducerUtil.changeParamsById(state, action)
+),
+on(UserActions.userClearParams, (state, action) =>
+  listByIdReducerUtil.clearParamsById(state, action)
+),
+on(UserActions.userClearData, (state, action) =>
+  listByIdReducerUtil.clearDataById(state, action))
 );
+
 
 export function reducer(state: ListUserState, action: Action) {
   return listUserReducer(state, action);

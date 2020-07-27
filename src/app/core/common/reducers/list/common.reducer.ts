@@ -3,8 +3,10 @@ import { PayloadAction } from '../../models/payload-action';
 import { ListMeta } from '../../models/list-meta';
 import { FailPayload, SuccessPayload } from '../../models/payload/common';
 import { NormalizedList } from '../../models/normalized';
+import _ from 'lodash';
 import { createSelector } from '@ngrx/store';
 import { ListUtil } from '../../../util/list.util';
+import { login } from '../../../login/actions/login.actions';
 
 /**
  * Reducer do obsługi list.
@@ -25,6 +27,7 @@ export let listReducerUtil = {
       ...state,
       loading: true,
       success: false,
+      errors: null,
     };
   },
   getSuccess: function <P = { [key: string]: any }, M = ListMeta>(
@@ -40,19 +43,43 @@ export let listReducerUtil = {
       errors: null,
     };
   },
-  getFailure: function <P = { [key: string]: any }, M = ListMeta>(): (
+  getFailure: function <P = { [key: string]: any }, M = ListMeta>(
     state: ListState<P, M>,
-    action: PayloadAction
-  ) => ListState<P, M> {
-    return (state: ListState<P, M>, action: PayloadAction): ListState<P, M> => {
-      const failPayload: FailPayload = action.payload;
-      return <ListState<P, M>>{
-        ...state,
-        data: [],
-        loading: false,
-        errors: failPayload.errors,
-        success: false,
-      };
+    action: any
+  ): ListState<P, M> {
+    const failPayload: any = action.error;
+    return <ListState<P, M>>{
+      ...state,
+      data: [],
+      loading: false,
+      errors: failPayload.message,
+      success: false,
+    };
+  },
+  changeParams: function <P = { [key: string]: any }, M = ListMeta>(
+    state: ListState<P, M>,
+    action: any
+  ): ListState<P, M> {
+    const params: P = action.params;
+    return <ListState<P, M>>{
+      ...state,
+      params,
+    };
+  },
+  clearParams: function <P = { [key: string]: any }, M = ListMeta>(
+    state: ListState<P, M>,
+  ): ListState<P, M> {
+    return <ListState<P, M>>{
+      ...state,
+      params: {},
+    };
+  },
+  clearData: function <P = { [key: string]: any }, M = ListMeta>(
+    state: ListState<P, M>,
+  ): ListState<P, M> {
+    return <ListState<P, M>>{
+      ...state,
+      data: {},
     };
   },
 };

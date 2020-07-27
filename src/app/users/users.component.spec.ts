@@ -1,4 +1,4 @@
-import { LoginPageComponent } from '../login-page/login-page.component';
+import { LoginPageComponent } from '../core/containers/login-page/login-page.component';
 import { async, TestBed } from '@angular/core/testing';
 import { CommonModule, Location } from '@angular/common';
 import { BrowserModule, By } from '@angular/platform-browser';
