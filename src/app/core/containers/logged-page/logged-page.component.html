@@ -1,0 +1,38 @@
+<div class="mainContainer">
+  <mat-toolbar class="example-header">
+    <p>
+      <button mat-button (click)="snav.toggle()">
+        <span class="material-icons">
+          list
+        </span>
+      </button>
+    </p>
+    <app-user-header> </app-user-header>
+    <p>
+      <button mat-button (click)="snav1.toggle()">
+        <span class="material-icons">
+          filter_list
+        </span>
+      </button>
+    </p>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav
+      class="search"
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      opened
+      class="side"
+    ><app-side-nav></app-side-nav
+    ></mat-sidenav>
+    <mat-sidenav
+      #snav1
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      opened
+      class="side"
+      position="end"
+    ><app-search-aside (userChangeParams)="changeParams($event)"></app-search-aside
+    ></mat-sidenav>
+    <app-users-table (sortParams)="sortParams($event)"></app-users-table>
+  </mat-sidenav-container>
+</div>
