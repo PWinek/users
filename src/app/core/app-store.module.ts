@@ -4,11 +4,10 @@ import { NgModule } from '@angular/core';
 import { authModule } from './login/auth.module';
 import {UserModule} from "./user/user.module";
 import { ContainersDirective } from './containers.directive';
-import { LoggedPageComponent } from './containers/logged-page/logged-page.component';
 
 @NgModule({
   imports: [CommonModule, authModule, UserModule],
   providers: [],
-  declarations: [ContainersDirective, LoggedPageComponent],
+  declarations: [ContainersDirective],
 })
 export class AppStoreModule {}
