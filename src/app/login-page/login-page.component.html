@@ -1,0 +1,46 @@
+
+<script src="login-page.component.spec.ts"></script>
+<link rel="stylesheet" href="login-page.component.scss" />
+<script src="login-page.component.ts"></script>
+<script src="../app.component.spec.ts"></script>
+<div class="loginPage">
+  <div class="login_window">
+    <div class="fail" *ngIf="userError$ | async">{{ userError$ | async }}</div>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <label>
+        <mat-form-field appearance="fill">
+          <mat-label> Enter your Login</mat-label>
+          <input formControlName="login" matInput />
+        </mat-form-field>
+      </label>
+      <br />
+      <br />
+      <label>
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your Password</mat-label>
+          <input
+            formControlName="password"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <br />
+        <br />
+        <div class="container">
+          <button id="submit" type="submit" mat-raised-button color="primary">
+            Zaloguj
+          </button>
+        </div>
+      </label>
+    </form>
+  </div>
+</div>

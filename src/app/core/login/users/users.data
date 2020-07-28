@@ -1,0 +1,17 @@
+export const users = [
+  {
+    id: 1,
+    login: 'Tadek',
+    password: 'tadek_1',
+  },
+  {
+    id: 2,
+    login: 'Marcin',
+    password: 'Marcin_1',
+  },
+  {
+    id: 3,
+    login: 'Bogdan',
+    password: 'bogus_12',
+  },
+];

@@ -1,0 +1,53 @@
+.login_window {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  -webkit-box-shadow: 2px 4px 26px -2px rgba(0, 0, 0, 0.72);
+  -moz-box-shadow: 2px 4px 26px -2px rgba(0, 0, 0, 0.72);
+  box-shadow: 2px 4px 26px -2px rgba(0, 0, 0, 0.72);
+}
+input {
+  width: 100%;
+  padding: 2px;
+}
+input::placeholder {
+  padding: 3px;
+}
+input:focus::placeholder {
+  color: transparent;
+}
+label {
+  width: 100%;
+}
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fail {
+  //display: none;
+  color: red;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.borderFailed {
+  border: 1.7px solid red;
+}
+mat-form-field {
+  width: 100%;
+}
+.loginPage
+{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(red, transparent),
+  linear-gradient(to top left, lime, transparent),
+  linear-gradient(to top right, blue, transparent);
+  background-blend-mode: screen;
+}

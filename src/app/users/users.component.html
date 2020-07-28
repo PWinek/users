@@ -1,4 +1,11 @@
-<p>users works!</p>
-<button (click)="getUser()">
-Get User
+<script src="../login-page/login-page.component.ts"></script>
+
+<app-user-header> </app-user-header>
+<div class="userContainer">
+  <app-side-nav></app-side-nav>
+  <app-users-table></app-users-table>
+  <app-search-aside></app-search-aside>
+</div>
+<button (click)="logOut()">
+  Log Out
 </button>
